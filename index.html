@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>NBA Data Visualization</title>
+
+  <!-- Optional external CSS file if you have one -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Minimal inline styles so it still looks good -->
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 24px;
+      background: #0b1020;
+      color: #f4f4f4;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+      letter-spacing: 0.04em;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .control-group {
+      color: #f4f4f4;
+      font-size: 14px;
+    }
+
+    select,
+    input[type="range"] {
+      margin-left: 6px;
+    }
+
+    #chart {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .tooltip {
+      position: absolute;
+      background: rgba(10, 10, 20, 0.95);
+      color: #f4f4f4;
+      padding: 6px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      pointer-events: none;
+      opacity: 0;
+      border: 1px solid #555;
+    }
+  </style>
+</head>
+<body>
+  <h1>NBA Performance by Age</h1>
+
+  <div style="text-align:center; margin-bottom: 10px;">
+    <a href="docs.html" style="color:#4aa3ff;">View project documentation →</a>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls">
+    <div class="control-group">
+      <label for="metric-select"><strong>Stat:</strong></label>
+      <select id="metric-select">
+        <option value="pts" selected>Points per game (PTS)</option>
+        <option value="reb">Rebounds per game (REB)</option>
+        <option value="ast">Assists per game (AST)</option>
+      </select>
+    </div>
+
+    <div class="control-group">
+      <label for="gp-min"><strong>Min games played:</strong></label>
+      <input id="gp-min" type="range" min="0" max="82" value="30" />
+      <span id="gp-min-label">30</span>
+    </div>
+  </div>
+
+  <!-- Chart container -->
+  <div id="chart"></div>
+
+  <!-- Tooltip -->
+  <div id="tooltip" class="tooltip"></div>
+
+  <!-- D3 library -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+
+  <!-- Your main D3 code -->
+  <script src="main.js"></script>
+</body>
+</html>
