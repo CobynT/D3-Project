@@ -1,1 +1,345 @@
-<h1>Documentation placeholder</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Documentation – NBA Performance by Age</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 32px 16px 64px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #020617;
+      color: #e5e7eb;
+      line-height: 1.6;
+    }
+    h1, h2, h3 {
+      color: #f9fafb;
+      margin-top: 1.6em;
+    }
+    a {
+      color: #60a5fa;
+    }
+    .tagline {
+      color: #9ca3af;
+      font-size: 0.95rem;
+      margin-top: 4px;
+    }
+    .section-label {
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.8rem;
+      color: #9ca3af;
+      font-weight: 600;
+    }
+    .screenshot-note {
+      font-size: 0.9rem;
+      color: #9ca3af;
+      margin-top: 4px;
+      margin-bottom: 1.2rem;
+    }
+    .code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      background: #020617;
+      border-radius: 4px;
+      padding: 2px 4px;
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: 24px;
+      font-size: 0.9rem;
+    }
+    .video-wrapper {
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+    }
+    iframe {
+      max-width: 100%;
+      border: none;
+      border-radius: 8px;
+    }
+    ul {
+      padding-left: 1.1rem;
+    }
+  </style>
+</head>
+<body>
+  <a class="back-link" href="index.html">← Back to visualization</a>
+
+  <h1>NBA Performance by Age – Project Documentation</h1>
+  <p class="tagline">
+    Interactive D3 visualization exploring how NBA scoring, rebounding, and playmaking change as players age.
+  </p>
+
+  <!-- =========================================
+       1. INTRO & DATASET
+  ========================================== -->
+  <p class="section-label">Part 1 – Motivation & Questions</p>
+  <h2>1. Motivation and Dataset</h2>
+
+  <p>
+    I chose an NBA dataset because I’ve always been fascinated with the combination of
+    sports and statistics. One of the most common debates in basketball is:
+    <strong>“When do players actually peak, and when does their game start to decline?”</strong>
+  </p>
+
+  <p>
+    To explore this question, I used a Kaggle dataset containing historical NBA player
+    data. The <span class="code">nba_players.csv</span> file includes attributes such as:
+  </p>
+
+  <ul>
+    <li><span class="code">age</span> – player age</li>
+    <li><span class="code">gp</span> – games played</li>
+    <li><span class="code">pts</span> – points per game</li>
+    <li><span class="code">reb</span> – rebounds per game</li>
+    <li><span class="code">ast</span> – assists per game</li>
+    <li><span class="code">team_abbreviation</span>, <span class="code">season</span>, etc.</li>
+  </ul>
+
+  <h3>2. Initial Questions</h3>
+
+  <p>
+    My main big-picture question was:
+  </p>
+
+  <p><strong>
+    • At what age do NBA players reach their peak performance, and when do they start to decline?
+  </strong></p>
+
+  <p>
+    As I explored the data, related questions came up:
+  </p>
+
+  <ul>
+    <li>
+      How does the peak age differ for specific stats? For example, do points, rebounds,
+      and assists peak at the same age?
+    </li>
+    <li>
+      When a player scores less as they get older, do other stats (like assists) increase
+      because they may pass more instead of scoring?
+    </li>
+    <li>
+      Is there a clear “peak age” for each stat, or is the decline more gradual?
+    </li>
+  </ul>
+
+  <!-- =========================================
+       2. DESIGN PROCESS
+  ========================================== -->
+  <p class="section-label">Part 2 – Design Process</p>
+  <h2>3. Design Process & Iterations</h2>
+
+  <h3>3.1 First Prototype</h3>
+  <p>
+    I started with a very simple design: a <strong>single bar chart</strong> showing
+    <strong>average points per game by age</strong>. The chart had:
+  </p>
+  <ul>
+    <li>One bar per age</li>
+    <li>Plain blue color for all bars</li>
+    <li>No interactivity or filters</li>
+  </ul>
+  <p class="screenshot-note">
+    [Screenshot idea: first simple bar chart of PTS vs age]
+  </p>
+
+  <h3>3.2 Major Changes and Improvements</h3>
+  <p>
+    As I interacted with the first chart, I realized it answered only part of my question.
+    From there I made a few key changes:
+  </p>
+
+  <ul>
+    <li>
+      <strong>Metric dropdown:</strong> I added a dropdown that lets the user switch
+      between <strong>Points (PTS)</strong>, <strong>Rebounds (REB)</strong>, and
+      <strong>Assists (AST)</strong>. This allows comparisons of how different parts of
+      a player’s game change with age.
+    </li>
+    <li>
+      <strong>Position filter:</strong> I then added a position filter so you can
+      choose between positions like guards, forwards, centers (or all positions).
+      This helps explore whether, for example, big men peak differently than guards.
+    </li>
+    <li>
+      <strong>Minimum games played filter:</strong> I added a slider that lets users
+      select a minimum number of games played. This was important so that rare
+      outliers with only a few games don’t distort the averages.
+    </li>
+    <li>
+      <strong>Color improvements:</strong> I updated the color palette so each stat
+      uses a distinct accent color that “pops” more and feels more professional,
+      instead of all stats sharing a plain blue.
+    </li>
+  </ul>
+
+  <p class="screenshot-note">
+    [Screenshot idea: later version with dropdowns and slider controls visible]
+  </p>
+
+  <!-- =========================================
+       3. DESIGN DECISIONS
+  ========================================== -->
+  <p class="section-label">Part 3 – Design Decisions</p>
+  <h2>4. Rationale for Design Choices</h2>
+
+  <h3>4.1 Why a Bar Chart?</h3>
+  <p>
+    Comparing ages directly was the most important task, so I chose a
+    <strong>bar chart</strong>. With one bar per age, it is very easy to:
+  </p>
+  <ul>
+    <li>See which age has the highest average value</li>
+    <li>Compare neighboring ages and spot where decline begins</li>
+    <li>Notice general “shape” trends (rising, peak, falling)</li>
+  </ul>
+
+  <h3>4.2 Interaction Design</h3>
+  <ul>
+    <li>
+      <strong>Stat dropdown:</strong> Lets users compare how different aspects of
+      performance (scoring, rebounding, playmaking) change with age beyond just points.
+    </li>
+    <li>
+      <strong>Position filter:</strong> Supports questions like “Do guards have a
+      different peak age than centers?” without overwhelming the main view.
+    </li>
+    <li>
+      <strong>Minimum games slider:</strong> Ensures the averages represent real
+      playing time instead of being skewed by players who only appeared in a few games.
+    </li>
+  </ul>
+
+  <h3>4.3 Color & Aesthetics</h3>
+  <p>
+    I adjusted the colors to make the visualization cleaner and more readable:
+  </p>
+  <ul>
+    <li>
+      Dark background to keep focus on the data and make the bars stand out.
+    </li>
+    <li>
+      Each stat uses its own accent color, which helps the user immediately recognize
+      whether they are looking at points, rebounds, or assists.
+    </li>
+    <li>
+      Subtle hover effects and labels to keep the design professional but still clear.
+    </li>
+  </ul>
+
+  <!-- =========================================
+       4. FINDINGS
+  ========================================== -->
+  <p class="section-label">Part 4 – Findings</p>
+  <h2>5. Insights & Patterns</h2>
+
+  <h3>5.1 Points vs Age</h3>
+  <p>
+    When looking at <strong>points per game by age</strong>, the chart suggests that
+    players tend to <strong>peak around ages 27–28</strong>. After that:
+  </p>
+  <ul>
+    <li>There is a small decline right after the peak.</li>
+    <li>
+      A larger drop appears when crossing from about age 30 to 31, showing the more
+      serious part of the decline.
+    </li>
+  </ul>
+
+  <h3>5.2 Rebounds vs Age</h3>
+  <p>
+    Rebounds show a similar pattern to points, but the decline seems a bit less severe.
+    The performance drops with age, but not quite as sharply as scoring.
+  </p>
+
+  <h3>5.3 Assists vs Age</h3>
+  <p>
+    Assists behave differently:
+  </p>
+  <ul>
+    <li>
+      There is not a clear sharp “peak” like with points — assists stay more
+      <strong>steady through the late 20s and early 30s</strong>.
+    </li>
+    <li>
+      The decline becomes more visible only once players reach their mid-30s.
+    </li>
+  </ul>
+
+  <p>
+    This supports the idea that as players get older, their raw scoring might decline,
+    but their playmaking and passing can stay strong for longer.
+  </p>
+
+  <h3>5.4 Effect of Minimum Games Filter</h3>
+  <p>
+    When increasing the minimum games played, the bars sometimes shift and can make
+    some older ages look slightly better. This suggests that:
+  </p>
+  <ul>
+    <li>
+      Very small sample sizes (players with only a few games) can distort the averages.
+    </li>
+    <li>
+      Filtering out low-game seasons may highlight more “real” rotation players and
+      smooth out noisy outliers.
+    </li>
+  </ul>
+
+  <!-- =========================================
+       5. HOW TO USE + AUDIENCE
+  ========================================== -->
+  <p class="section-label">Part 5 – Usage & Audience</p>
+  <h2>6. How to Use the Visualization</h2>
+
+  <p>
+    The main goal of the visualization is to let users <strong>explore how NBA
+    performance changes with age</strong>, and to make it easy to:
+  </p>
+
+  <ul>
+    <li>See the peak age for points, rebounds, and assists.</li>
+    <li>Compare how quickly different stats decline with age.</li>
+    <li>Filter by position and games played to reduce noise.</li>
+  </ul>
+
+  <p>
+    The intended audience is more on the <strong>casual side</strong>:
+    fans, students, and anyone curious about NBA careers and aging, rather than only
+    professional analysts. The interface is kept simple with just a few controls so
+    it’s easy to understand without reading a manual.
+  </p>
+
+  <!-- =========================================
+       6. VIDEO PLACEHOLDER
+  ========================================== -->
+  <p class="section-label">Part 6 – Project Video</p>
+  <h2>7. Walkthrough Video</h2>
+
+  <p>
+    Below is a short (2–4 minute) video that walks through the visualization, explains
+    the controls, and highlights some of the interesting patterns in the data.
+  </p>
+
+  <div class="video-wrapper">
+    <!-- TODO: replace VIDEO_ID with your actual YouTube video id -->
+    <iframe
+      width="560"
+      height="315"
+      src="https://www.youtube.com/embed/VIDEO_ID"
+      title="NBA Performance by Age – D3 Visualization Walkthrough"
+      allowfullscreen
+    ></iframe>
+  </div>
+
+  <p class="screenshot-note">
+    (For submission: record a screen capture while using the visualization, upload
+    it to YouTube as “Unlisted” or “Public”, and replace <span class="code">VIDEO_ID</span>
+    in the embed URL.)
+  </p>
+
+</body>
+</html>
