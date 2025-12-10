@@ -85,7 +85,7 @@ let currentMinGp = +gpSlider.node().value;
 // Load data
 d3.csv("nba_players.csv").then(function (data) {
   // Parse fields we care about
-  allData = raw.map(d => ({
+  allData = data.map(d => ({
     age: +d.age,
     gp: +d.gp,
     pts: +d.pts,
