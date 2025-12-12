@@ -59,7 +59,7 @@ const title = svg.append("text")
   .style("font-weight", "600")
   .style("fill", "#f4f4f4");
 
-// X label
+// X 
 chart.append("text")
   .attr("x", innerWidth / 2)
   .attr("y", innerHeight + 40)
@@ -68,7 +68,7 @@ chart.append("text")
   .style("fill", "#f4f4f4")
   .text("Age");
 
-// Y label
+// Y 
 const yLabel = chart.append("text")
   .attr("transform", "rotate(-90)")
   .attr("x", -innerHeight / 2)
@@ -114,7 +114,7 @@ d3.csv("nba_players.csv").then(function (data) {
   });
 });
 
-// Helper: compute aggregated data by age for current metric & gp filter
+// compute aggregated data by age for current metric & gp filter
 function getAggregatedData() {
   const metric = metrics[currentMetricKey];
 
@@ -134,7 +134,7 @@ function getAggregatedData() {
   return aggregated;
 }
 
-// Update chart based on current state
+// Update chart
 function updateChart() {
   const metric = metrics[currentMetricKey];
   const color = metricColors[currentMetricKey];
@@ -173,7 +173,7 @@ function updateChart() {
   const bars = chart.selectAll(".bar")
     .data(aggregated, d => d.age);
 
-  // EXIT
+  // Exit
   bars.exit()
     .transition()
     .duration(300)
@@ -181,7 +181,7 @@ function updateChart() {
     .attr("height", 0)
     .remove();
 
-  // ENTER + UPDATE
+  // Enter + Updat
   bars.enter()
     .append("rect")
     .attr("class", "bar")
