@@ -119,12 +119,12 @@
         <li>Restricted the age range to roughly 18–45 to remove extreme outliers that are not meaningful.</li>
         <li>Grouped players by age and computed the average value for the selected metric (PTS, REB, or AST).</li>
         <li>
-          Applied a dynamic filter based on the minimum games played, controlled by a slider, so that users can
+          Applied a dynamic filter based on the minimum games played controlled by a slider, so that users can
           remove players who only appeared in a few games and might skew the averages.
         </li>
       </ul>
       <p>
-        These steps ensure that the visualization is based on clean and reasonable data, and that the patterns shown
+        These steps ensure that the visualization is based on clean and reasonable data and that the patterns shown
         are more about real playing time rather than noise from tiny samples.
       </p>
     </section>
@@ -151,12 +151,6 @@
         metric, adjust the games played filter, and see updated trends instantly. The iterative process was mostly
         about asking: “What would make this easier to explore and less misleading?”
       </p>
-      <div class="screenshot">
-        <!-- When ready, drop in a real screenshot file and update the src path -->
-        <!-- Example:
-        <img src="screenshots/age_pts.png" alt="Average points per game by age" width="100%">
-        -->
-      </div>
     </section>
 
     <!-- 4. Rationale for Design Choices -->
@@ -172,10 +166,10 @@
         The dropdown for PTS / REB / AST is important because it lets you compare how different aspects of the game
         are affected by age, instead of only looking at scoring. A player’s scoring might go down over time, but
         their rebounding or assisting could behave differently, and the dropdown makes it trivial to switch between
-        these views without reloading or re-creating charts.
+        these views without reloading or recreating charts.
       </p>
       <p>
-        I wanted the minimum games played filter because without it, the averages can be skewed by players with very
+        I wanted the minimum games played filter because without it the averages can be skewed by players with very
         low minutes or only a few appearances. The slider lets you interactively remove those outlier data points
         so that the trends better reflect regular rotation players. Visually, it also helps smooth out some of the
         noisy bumpiness at certain ages.
@@ -184,7 +178,7 @@
         For color, I like the updated scheme because it pops more and feels more like a real sports graphic.
         Each stat has its own color (orange-gold for PTS, green for REB, purple for AST), which makes it clear
         which metric is currently being shown. This avoids confusion and makes it easier to remember what you are
-        looking at, especially if you switch back and forth between metrics.
+        looking at.
       </p>
     </section>
 
@@ -219,12 +213,6 @@
         The interactive controls helped me explore these trends and see how different filters and metrics tell
         slightly different stories about how NBA players age.
       </p>
-      <div class="screenshot">
-        <!-- Optional: another screenshot in a different configuration -->
-        <!-- Example:
-        <img src="screenshots/age_ast_gp50.png" alt="Assists by age with GP filter" width="100%">
-        -->
-      </div>
     </section>
 
     <!-- 6. Demo Video -->
@@ -234,10 +222,6 @@
     The video below demonstrates how to use the interactive visualization. It walks through the main controls,
     shows how to switch between points, rebounds, and assists, and explains how changing the minimum games played
     filter affects the trends.
-  </p>
-  <p>
-    Once the video is recorded and uploaded to YouTube, the <code>VIDEO_ID</code> in the embed link has been
-    replaced with the actual ID of the uploaded video.
   </p>
 
   <iframe
